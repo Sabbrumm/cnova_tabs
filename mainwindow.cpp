@@ -161,11 +161,11 @@ void MainWindow::on_export_button_clicked()
         cellA = sheet1->querySubObject("Range(QVariant, QVariant)", columnA);
         cellB = sheet1->querySubObject("Range(QVariant, QVariant)", columnB);
 
-        qDebug() <<ui->tableWidget->item(i, 0)->text();
-        qDebug() <<ui->tableWidget->item(i, 1)->text();
+        if (ui->tableWidget->item(i,0))
+            cellA->dynamicCall("SetValue(const QVariant&)", QVariant(ui->tableWidget->item(i, 0)->text()));
 
-        cellA->dynamicCall("SetValue(const QVariant&)", QVariant(ui->tableWidget->item(i, 0)->text()));
-        cellB->dynamicCall("SetValue(const QVariant&)", QVariant(ui->tableWidget->item(i, 1)->text()));
+        if (ui->tableWidget->item(i,1))
+            cellB->dynamicCall("SetValue(const QVariant&)", QVariant(ui->tableWidget->item(i, 1)->text()));
     }
 
     //Заполнение инфы о студенте
