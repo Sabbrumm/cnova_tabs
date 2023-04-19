@@ -102,6 +102,18 @@
                   <height>16777215</height>
                  </size>
                 </property>
+                <property name="inputMask">
+                 <string/>
+                </property>
+                <property name="maxLength">
+                 <number>80</number>
+                </property>
+                <property name="placeholderText">
+                 <string>Введите ФИО студента</string>
+                </property>
+                <property name="clearButtonEnabled">
+                 <bool>false</bool>
+                </property>
                </widget>
               </item>
              </layout>
@@ -116,7 +128,32 @@
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="group_combo"/>
+               <widget class="QLineEdit" name="group_edit">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="inputMask">
+                 <string notr="true"/>
+                </property>
+                <property name="maxLength">
+                 <number>32767</number>
+                </property>
+                <property name="frame">
+                 <bool>true</bool>
+                </property>
+                <property name="placeholderText">
+                 <string>Введите номер группы (только 4 цифры)</string>
+                </property>
+               </widget>
               </item>
              </layout>
             </item>
@@ -174,9 +211,9 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="confirm_button">
+               <widget class="QPushButton" name="button_tostud">
                 <property name="text">
-                 <string>Найти</string>
+                 <string>Перейти к студенту</string>
                 </property>
                </widget>
               </item>
@@ -207,7 +244,70 @@
           <item row="0" column="0">
            <layout class="QVBoxLayout" name="verticalLayout_2">
             <item>
-             <widget class="QTableWidget" name="tableWidget"/>
+             <widget class="QTableWidget" name="tableWidget">
+              <property name="alternatingRowColors">
+               <bool>true</bool>
+              </property>
+              <property name="sortingEnabled">
+               <bool>true</bool>
+              </property>
+              <property name="rowCount">
+               <number>0</number>
+              </property>
+              <property name="columnCount">
+               <number>2</number>
+              </property>
+              <attribute name="horizontalHeaderCascadingSectionResizes">
+               <bool>true</bool>
+              </attribute>
+              <attribute name="horizontalHeaderShowSortIndicator" stdset="0">
+               <bool>false</bool>
+              </attribute>
+              <attribute name="horizontalHeaderStretchLastSection">
+               <bool>true</bool>
+              </attribute>
+              <column>
+               <property name="text">
+                <string>Предмет</string>
+               </property>
+              </column>
+              <column>
+               <property name="text">
+                <string>Оценка</string>
+               </property>
+              </column>
+             </widget>
+            </item>
+            <item>
+             <layout class="QHBoxLayout" name="rowButtonsLayout">
+              <item>
+               <widget class="QPushButton" name="addrow_button">
+                <property name="text">
+                 <string>+</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QPushButton" name="delrow_button">
+                <property name="text">
+                 <string>-</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <spacer name="horizontalSpacer_5">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+             </layout>
             </item>
             <item>
              <spacer name="verticalSpacer_3">
@@ -223,16 +323,40 @@
              </spacer>
             </item>
             <item>
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <spacer name="horizontalSpacer_6">
+                <property name="orientation">
+                 <enum>Qt::Horizontal</enum>
+                </property>
+                <property name="sizeHint" stdset="0">
+                 <size>
+                  <width>40</width>
+                  <height>20</height>
+                 </size>
+                </property>
+               </spacer>
+              </item>
+              <item>
+               <widget class="QPushButton" name="getback_button">
+                <property name="text">
+                 <string>Заполнить другого студента</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item>
              <layout class="QHBoxLayout" name="buttons_layout">
               <item>
-               <widget class="QPushButton" name="pushButton">
+               <widget class="QPushButton" name="sorting_button">
                 <property name="text">
                  <string>Сортировать</string>
                 </property>
                </widget>
               </item>
               <item>
-               <widget class="QComboBox" name="comboBox">
+               <widget class="QComboBox" name="sortBox">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -265,7 +389,7 @@
                </spacer>
               </item>
               <item>
-               <widget class="QPushButton" name="pushButton_2">
+               <widget class="QPushButton" name="export_button">
                 <property name="text">
                  <string>Экспорт в Excel</string>
                 </property>
@@ -322,32 +446,14 @@
                </spacer>
               </item>
               <item>
-               <widget class="QLCDNumber" name="timeWidget">
+               <widget class="QLabel" name="label_clock">
                 <property name="font">
                  <font>
-                  <pointsize>13</pointsize>
+                  <pointsize>15</pointsize>
                  </font>
                 </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
-                </property>
-                <property name="smallDecimalPoint">
-                 <bool>true</bool>
-                </property>
-                <property name="digitCount">
-                 <number>6</number>
-                </property>
-                <property name="mode">
-                 <enum>QLCDNumber::Dec</enum>
-                </property>
-                <property name="segmentStyle">
-                 <enum>QLCDNumber::Flat</enum>
-                </property>
-                <property name="value" stdset="0">
-                 <double>17.030000000000001</double>
-                </property>
-                <property name="intValue" stdset="0">
-                 <number>17</number>
+                <property name="text">
+                 <string>00:00:00</string>
                 </property>
                </widget>
               </item>
